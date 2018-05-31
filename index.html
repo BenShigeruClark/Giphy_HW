@@ -1,21 +1,130 @@
-
 <!Doctype html>
 
-<html>
+<html lang="en">
 
 <head>
     <title>Giphy Homework</title>
 
 </head>
 
-<Body>
+<body>
+
+
+
+    <div id="buttonDiv"></div>
+    <br>
+    <form id="instrument-form">
+        <label for="instrument-input">Add a Instrument!</label>
+
+        <input type="text" id="instrument-input">
+        <br>
+
+        <input id="add-instrument" type="submit" value="Submit">
+
+    </form>
+
+    <br>
+    <div id="gifsAppearHere"></div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        // <!-- create an array of strings, I am picking music instruments -->
+        var musicInstruments = ["Synthesizers", "Guitars", "Drums", "Bass Guitars", "Mixers",
+            "Modular Synths", "Pianos", "Wind Instruments", "Taiko Drums", "String Instruments"]
+
+        // <!-- create buttons in HTML, hint: use a loop to append a button for each string in the array -->
+        for (var i = 0; i < musicInstruments.length; i++) {
+
+            var buttonDiv = $("#buttonDiv");
+            
+            var btn = $('<button>');
+            btn.attr("id", musicInstruments[i]);
+            btn.attr("class", 'queryButton');
+            btn.text(musicInstruments[i]);
+
+            buttonDiv.append(btn);
+            
+
+            var instrumentButton = $("<div>");
+            var instrumentImage = $("<img>");
+
+            // instrumentImage.attr("data-musicInstruments", results[i].images.fixed_height.url);
+
+            instrumentButton.append(instrumentImage);
+
+        };
+
+        // <!-- When user clicks on a button, the page should grab 10 static, non-animated gif 
+        // images from the GIPHY API and place them on the page.-->
+        $(".queryButton").on("click", function () {
+
+            console.log(this.id);
+            // var instruments = $(this).attr(instrumentButton);
+
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + this.id + "&limit=5&api_key=doy0UFl8bvjLOqsL3TiPZaQp7L3xNpPr";
+
+
+
+            //  loadJSON(url,gotData);         
+
+            // My API key:  doy0UFl8bvjLOqsL3TiPZaQp7L3xNpPr
+
+            // q =  array of musicInstruments string when button is clicked
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                .then(function (response) {
+
+                    // console.log(queryURL);
+
+                    console.log(response);
+
+                    // var imageURL = response.data.images.url;
+
+
+                    
+                    //  var instImage = $("<img>");
+
+          
+                    //  instImage.attr("src", imageUrl);
+                    //  instImage.attr("alt", "inst image");
+
+                    //  //prepends image at the top of the page
+                    // $("#gifsAppearHere").prepend(instImage);
+
+
+
+                    
+
+
+                });
+        });
+
+        // <!-- When the user clicks one of the still GIPHY images, the 
+            // gif should animate. If the user clicks the gif again, it should stop playing. -->
+
+
+//     <!-- Under every gif, display its rating (PG, G, so on).
+//    * This data is provided by the GIPHY API.
+//    * Only once you get images displaying with button presses should you move on to the next step. -->
+
+
+//    <!-- Add a form to your page takes the value from a user input box and adds it into your `topics` array. 
+//     Then make a function call that takes each topic in the array remakes the buttons on the page.-->
+
+
+
+    </script>
 
 
 
 
 
+</body>
 
-
-    
-</Body>
 </html>
